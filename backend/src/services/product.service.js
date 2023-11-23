@@ -7,7 +7,7 @@ async function createProduct(reqData){
   if(!topLevel){
     topLevel=new Category({
       name:reqData.topLevelCategory,
-      level:1
+      lavel:1
     })
   }
   let secondLevel=await Category.findOne({
@@ -18,7 +18,7 @@ async function createProduct(reqData){
     secondLevel=new Category({
       name:reqData.secondLevelCategory,
     parentCategory:topLevel._id,
-    level:2
+    lavel:2
     })
   }
   let thirdLevel=await Category.findOne({
@@ -29,7 +29,7 @@ async function createProduct(reqData){
     thirdLevel=new Category({
       name:reqData.thirdLevelCategory,
     parentCategory:secondLevel._id,
-    level:3
+    lavel:3
     })
 }
 const product=new Product({
@@ -56,7 +56,7 @@ async function deleteProduct(productId){
 }
 
 async function updateProduct(productId, reqData){
-  return updatedProduct=await OProduct.findProductById(productId, reqData);
+  return await Product.findByIdAndUpdate(productId, reqData);
 }
 async function findProductById(id){
   const product=await Product.findById(id).populate("category").exec();
@@ -76,7 +76,7 @@ pageSize=pageSize || 10;
 if(category){
   const existCategory=await Category.findOne({name:category});
   if(existCategory){
-    query=query.where("category".equals(existCategory._id));
+    query=query.where("category").equals(existCategory._id);
   } else{
     return {content:[],currentPage:1,totalPages:0}
   }
@@ -97,17 +97,17 @@ if(minPrice && maxPrice){
   query=query.where("discountedPrice").gte(minPrice).lte(maxPrice);
 }
 if(minDiscount){
-  query=query.where("discountedPercent").gte(minDiscount);
+  query=query.where("discountedPercent").gt(minDiscount);
 }
 if(stock){
   if(stock=="in_stock"){
-  query=query.where("quantity").gte(0);
+  query=query.where("quantity").gt(0);
   }
   else if(stock=="out_of_stock"){
-    query=query.where("quantity").gte(1);
+    query=query.where("quantity").gt(1);
   }
 }
-if(stock){
+if(sort){
   const sortDirection=sort==="price_high"?-1:1;
   query=query.sort({discountedPrice:sortDirection})
 }

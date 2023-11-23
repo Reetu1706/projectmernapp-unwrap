@@ -25,12 +25,12 @@ const cartRouter=require("./routes/cart.route.js");
 app.use("/api/cart", cartRouter);
 
 const cartItemRouter=require("./routes/cartItem.route.js");
-app.use("/api/cart_items",cartItemRouter);
+app.use("/api/cart_item",cartItemRouter);
 
 const orderRouter=require("./routes/order.routes.js");
 app.use("/api/orders",orderRouter);
 
-const adminOrderRouter=require("./routes/adminOrder.routes.js")
+const adminOrderRouter=require("./routes/adminOrder.route.js")
 app.use("/api/admin/orders", adminOrderRouter)
 
 const reviewRouter=require("./routes/review.route.js");

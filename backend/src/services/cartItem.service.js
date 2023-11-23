@@ -8,7 +8,7 @@ async function updateCartItem(userId,cartItemId,cartItemData){
       throw new Error("cart item not found:",cartItemId);
    }
    const user=await userService.findUserById(item.userId)
-   if(!user){
+    if(!user){
     throw new Error("user not found:", userId);
    }
 

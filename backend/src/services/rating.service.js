@@ -8,7 +8,7 @@ async function createRating(req, user){
   const rating=new Rating({
     product:product._id,
     user:user._id,
-    rating:req.review,
+    rating:req.rating,
     createdAt:new Date(),
   })
 

@@ -1,5 +1,6 @@
 const express=require("express");
 const router=express.Router();
+
 const orderController=require("../controller/adminOrder.controller.js");
 const authenticate = require("../middleware/authenticate.js");
 
@@ -11,5 +12,3 @@ router.put('/:orderId/cancel',authenticate,orderController.cancelOrders);
 router.put('/:orderId/delete',authenticate,orderController.deleteOrders);
 
 module.exports=router;
-
-

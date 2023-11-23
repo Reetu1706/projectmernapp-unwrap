@@ -13,11 +13,11 @@ return res.status(500).send({error:error.message})
 const findOrderById=async(req,res)=>{
   const user=req.user;
   try{
-    const createdOrder=await orderService.findOrderById(req.params.id);
-    return res.status(201).send(createdOrder)
+    let createdOrder=await orderService.findOrderById(req.params.id);
+    return res.status(201).send(createdOrder);
 
   }catch(error){
-return res.status(500).send({error:error.message})
+return res.status(500).send({error:error.message});
   }
 }
 const orderHistory=async(req,res)=>{

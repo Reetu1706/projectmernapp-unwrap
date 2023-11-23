@@ -1,8 +1,8 @@
 const jwtProvider=require("../config/jwtProvider.js");
 const userService=require("../services/user.service.js");
 
-const authenticate=async(req,res)=>{
-  //Bearer,token
+const authenticate=async(req,res,next)=>{
+  //Bearer token
   try{
     const token=req.headers.authorization?.split(" ")[1];
     if(!token){

@@ -1,21 +1,22 @@
-const Cart = require("../models/cart.model.js");
-const Product = require("../models/product.model.js");
+const Cart=require("../models/cart.model")
+const Product=require("../models/product.model")
+const CartItem=require("../models/cartItem.model");
+const cartItem = require("../models/cartItem.model");
 
 async function createCart(user){
   try{
   const cart = new Cart({user})
-  const createCart = await cart.save();
-  return createCart;
+  const createdCart = await cart.save();
+  return createdCart;
   } catch (error){
     throw new Error(error.message);
   }
 }
 
-
 async function findUserCart(userId){
   try{
-    let cart = await Cart.findOne({user:user});
-    let cartItems = await CartItem.find({cart:cart._id}.populate("product"))
+    let cart = await Cart.findOne({user:userId});
+    let cartItems = await CartItem.find({cart:cart._id}.populate("product"));
     cart.cartItems=cartItems;
 
     let totalPrice=0;
@@ -30,7 +31,7 @@ async function findUserCart(userId){
 
     cart.totalPrice=totalPrice;
     cart.totalItem=totalItem;
-    cart.discount=totalPrice - totalDiscountedPrice;
+    cart.discount=totalPrice-totalDiscountedPrice;
   }catch(error){
     throw new Error(error.message)
   }
@@ -39,12 +40,12 @@ async function findUserCart(userId){
 async function addCartItem(userId, req){
   try{
     const cart = await Cart.findOne({user: userId})
-    const product = await Product.findOne({req, productId});
+    const product = await Product.findById(req.productId);
 
     const isPresent=await CartItem.findOne({cart:cart._id, product:product._id,userId})
 
     if(!isPresent){
-      const cartItem = new cartItem({
+      const cartItem = new CartItem({
         product:product._id,
         cart:cart._id,
         quantity:1,

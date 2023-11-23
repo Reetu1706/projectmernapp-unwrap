@@ -12,7 +12,6 @@ return res.status(500).send({error:error.message})
 }
 const getAllRating=async(req,res)=>{
   const productId=req.params.productId;
-  const user=req.user;
   try{
     const ratings=await reviewService.getAllRating(productId);
     return res.status(201).send(ratings);

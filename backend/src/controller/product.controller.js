@@ -41,7 +41,6 @@ return res.status(500).send({error:error.message})
 
 }
 const getAllProducts=async(req,res)=>{
-  const productId=req.params.id;
   try{
     const products=await productService.getAllProducts(req.query);
     return res.status(201).send(products)
@@ -51,7 +50,6 @@ return res.status(500).send({error:error.message})
 
 }
 const createMultipleProduct=async(req,res)=>{
-  const productId=req.params.id;
   try{
     const product=await productService.createMultipleProduct(req.body);
     return res.status(201).send({message:"Products created successfully"})

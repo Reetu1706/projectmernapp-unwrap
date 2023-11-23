@@ -1,6 +1,8 @@
-userService=require("../services/user.service.js");
+const userService=require("../services/user.service.js");
+const jwt = require("jsonwebtoken")
 //[Bearer,token]
 const getUserProfile=async(req,res)=>{
+  console.log("req",jwt);
   try{
     const jwt=req.headers.authorization?.split(" ")[1];
 
