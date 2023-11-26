@@ -10,6 +10,6 @@ const cartItemSchema = new mongoose.Schema({
   userId:{type:mongoose.Schema.Types.ObjectId, ref:'users', required:true},
 })
 
-const cartItem = mongoose.model("cartItems", cartItemSchema);
+const CartItem = mongoose.model("cartItems", cartItemSchema);
 
-module.exports=cartItem;
+module.exports=CartItem;

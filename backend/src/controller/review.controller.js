@@ -1,7 +1,7 @@
 const reviewService=require("../services/review.service.js");
 
 const createReview=async(req,res)=>{
-  const user=req.user;
+  const user=await req.user;
   try{
     const review=await reviewService.createReview(req.body,user);
     return res.status(201).send(review);
@@ -11,7 +11,7 @@ return res.status(500).send({error:error.message})
   }
 }
 const getAllReview=async(req,res)=>{
-  const productId=req.params.productId;
+  const productId=await req.params.productId;
   try{
     const reviews=await reviewService.getAllReview(productId);
     return res.status(201).send(reviews);

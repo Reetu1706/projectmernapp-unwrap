@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken")
 const getUserProfile=async(req,res)=>{
   console.log("req",jwt);
   try{
-    const jwt=req.headers.authorization?.split(" ")[1];
+    const jwt=await req.headers.authorization?.split(" ")[1];
 
     if(!jwt){
       return res.status(404).send({error:'token not found'})

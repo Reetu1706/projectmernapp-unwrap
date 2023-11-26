@@ -6,31 +6,34 @@ async function createProduct(reqData){
 
   if(!topLevel){
     topLevel=new Category({
-      name:reqData.topLevelCategory,
-      lavel:1
+      name:reqData.topLavelCategory,
+      level:1
     })
+    await topLevel.save();
   }
   let secondLevel=await Category.findOne({
-    name:reqData.secondLevelCategory,
+    name:reqData.secondLavelCategory,
     parentCategory:topLevel._id
   })
   if(!secondLevel){
     secondLevel=new Category({
-      name:reqData.secondLevelCategory,
+      name:reqData.secondLavelCategory,
     parentCategory:topLevel._id,
-    lavel:2
+    level:2
     })
+    await secondLevel.save();
   }
   let thirdLevel=await Category.findOne({
-    name:reqData.thirdLevelCategory,
+    name:reqData.thirdLavelCategory,
     parentCategory:secondLevel._id
   })
   if(!thirdLevel){
     thirdLevel=new Category({
-      name:reqData.thirdLevelCategory,
+      name:reqData.thirdLavelCategory,
     parentCategory:secondLevel._id,
-    lavel:3
+    level:3
     })
+    await thirdLevel.save();
 }
 const product=new Product({
   title:reqData.title,

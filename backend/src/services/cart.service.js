@@ -1,7 +1,6 @@
 const Cart=require("../models/cart.model")
 const Product=require("../models/product.model")
 const CartItem=require("../models/cartItem.model");
-const cartItem = require("../models/cartItem.model");
 
 async function createCart(user){
   try{

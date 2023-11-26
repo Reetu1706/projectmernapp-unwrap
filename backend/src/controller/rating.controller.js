@@ -1,7 +1,7 @@
 const ratingService=require("../services/rating.service.js");
 
 const createRating=async(req,res)=>{
-  const user=req.user;
+  const user=await req.user;
   try{
     const rating=await ratingService.createRating(req.body,user);
     return res.status(201).send(rating);
@@ -11,7 +11,7 @@ return res.status(500).send({error:error.message})
   }
 }
 const getAllRating=async(req,res)=>{
-  const productId=req.params.productId;
+  const productId=await req.params.productId;
   try{
     const ratings=await reviewService.getAllRating(productId);
     return res.status(201).send(ratings);
